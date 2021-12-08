@@ -14,16 +14,22 @@ class ApplicationController < Sinatra::Base
 
   post '/comics' do
     Comic.find_or_create_by(
-      title: params[:title],
-      image: params[:image],
-      year_published: params[:year_published],
-      publisher: params[:publisher],
-      condition: params[:condition],
-      super_hero: params[:super_hero],
-      price: params[:price],
-      seller_id: params[:seller_id]
+      params
     )
-    review.to_json
+    comic.to_json
+  end
+
+  delete '/comics/:id' do
+    comic = Comic.find(params[:id])
+    comic.destroy
+    comic.to_json
+  end
+
+  patch '/comics/:id' do
+    comic = Comic.find(params[:id])
+    comic.update(price: params[:price])
+    comic.update(seller_id: params[:seller_id])
+    comic.to_json
   end
 
   post '/seller' do
