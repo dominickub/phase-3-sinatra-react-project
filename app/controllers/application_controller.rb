@@ -13,7 +13,17 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/comics' do
-    Comic.find_or_create_by(title: title)
+    Comic.find_or_create_by(
+      title: params[:title],
+      image: params[:image],
+      year_published: params[:year_published],
+      publisher: params[:publisher],
+      condition: params[:condition],
+      super_hero: params[:super_hero],
+      price: params[:price],
+      seller_id: params[:seller_id]
+    )
+    review.to_json
   end
 
   post '/seller' do
@@ -21,6 +31,7 @@ class ApplicationController < Sinatra::Base
   end
 
   # Comic.destroy(comic_id: comic.id)
+  
   
 
 end
