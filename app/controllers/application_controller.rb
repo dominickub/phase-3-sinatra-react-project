@@ -27,8 +27,7 @@ class ApplicationController < Sinatra::Base
 
   patch '/comics/:id' do
     comic = Comic.find(params[:id])
-    comic.update(price: params[:price])
-    comic.update(seller_id: params[:seller_id])
+    comic.update(params)
     comic.to_json
   end
 
